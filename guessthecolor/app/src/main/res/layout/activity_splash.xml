@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/downloa">
+
+    <!-- Label para exibir o nome da cor -->
+    <TextView
+        android:id="@+id/colorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cor"
+        android:textColor="@android:color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Botões das cores -->
+    <Button
+        android:id="@+id/buttonRed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vermelho"
+        android:backgroundTint="@android:color/holo_red_light"/>
+
+    <Button
+        android:id="@+id/buttonBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Azul"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonGreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verde"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonYellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amarelo"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preto"
+        android:backgroundTint="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Branco"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

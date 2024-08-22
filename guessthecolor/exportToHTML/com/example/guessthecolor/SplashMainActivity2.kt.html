@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>SplashMainActivity2.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SplashMainActivity2.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.guessthecolor</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import android.widget.TextView</span>
+<span class="s1">import android.widget.Toast</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import com.example.guessthecolor.databinding.ActivityGameOverBinding</span>
+<span class="s1">import com.example.guessthecolor.databinding.ActivitySplashBinding</span>
+
+<span class="s0">class </span><span class="s1">SplashMainActivity2 : AppCompatActivity() {</span>
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">binding: ActivitySplashBinding</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">colors = listOf(</span><span class="s2">&quot;Vermelho&quot;</span><span class="s0">, </span><span class="s2">&quot;Azul&quot;</span><span class="s0">, </span><span class="s2">&quot;Verde&quot;</span><span class="s0">, </span><span class="s2">&quot;Amarelo&quot;</span><span class="s0">, </span><span class="s2">&quot;Preto&quot;</span><span class="s0">, </span><span class="s2">&quot;Branco&quot;</span><span class="s1">)</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">correctColor: String</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">attempts = </span><span class="s3">0</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">maxAttempts = </span><span class="s3">5</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">setContentView(R.layout.activity_splash)  </span><span class="s4">// Certifique-se de usar o layout correto</span>
+
+        <span class="s0">val </span><span class="s1">colorTextView: TextView = findViewById(R.id.colorTextView)</span>
+
+        <span class="s4">// Cria uma lista de botões com base nos IDs definidos no layout XML</span>
+        <span class="s0">val </span><span class="s1">buttons = listOf&lt;Button&gt;(</span>
+            <span class="s1">findViewById(R.id.buttonRed)</span><span class="s0">,</span>
+            <span class="s1">findViewById(R.id.buttonBlue)</span><span class="s0">,</span>
+            <span class="s1">findViewById(R.id.buttonGreen)</span><span class="s0">,</span>
+            <span class="s1">findViewById(R.id.buttonYellow)</span><span class="s0">,</span>
+            <span class="s1">findViewById(R.id.buttonBlack)</span><span class="s0">,</span>
+            <span class="s1">findViewById(R.id.buttonWhite)</span>
+        <span class="s1">)</span>
+
+        <span class="s4">// Função para configurar o jogo</span>
+        <span class="s0">fun </span><span class="s1">setupGame() {</span>
+            <span class="s1">correctColor = colors.random()</span>
+            <span class="s0">val </span><span class="s1">displayedColor = colors.filter { it != correctColor }.random()</span>
+
+            <span class="s1">colorTextView.text = correctColor</span>
+            <span class="s1">colorTextView.setTextColor(getColorForName(displayedColor))</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// Configura um listener de clique para cada botão na lista</span>
+        <span class="s1">buttons.forEach { button -&gt;</span>
+            <span class="s1">button.setOnClickListener {</span>
+                <span class="s1">attempts++</span>
+                <span class="s0">val </span><span class="s1">selectedColor = button.text.toString()</span>
+                <span class="s4">// Verifica se a cor selecionada é a correta</span>
+                <span class="s0">if </span><span class="s1">(selectedColor == correctColor) {</span>
+                    <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s2">&quot;Parabéns! Você acertou!&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span>
+                    <span class="s0">val </span><span class="s1">intent = Intent(</span><span class="s0">this, </span><span class="s1">MainActivity::</span><span class="s0">class</span><span class="s1">.java) </span><span class="s4">// Volta para a tela inicial</span>
+                    <span class="s1">startActivity(intent)</span>
+                    <span class="s1">finish()</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s4">// Mostra uma mensagem de erro com a cor correta</span>
+                    <span class="s1">Toast.makeText(</span>
+                        <span class="s0">this,</span>
+                        <span class="s2">&quot;Errado! A cor correta era </span><span class="s0">$</span><span class="s1">correctColor</span><span class="s2">.&quot;</span><span class="s0">,</span>
+                        <span class="s1">Toast.LENGTH_SHORT</span>
+                    <span class="s1">).show()</span>
+                    <span class="s4">// Verifica se o número máximo de tentativas foi alcançado</span>
+                    <span class="s0">if </span><span class="s1">(attempts &gt;= maxAttempts) {</span>
+                        <span class="s0">val </span><span class="s1">intent = Intent(</span>
+                            <span class="s0">this,</span>
+                            <span class="s1">GameOverMainActivity2::</span><span class="s0">class</span><span class="s1">.java</span>
+                        <span class="s1">)  </span><span class="s4">// Se sim, vai para a tela de Game Over</span>
+                        <span class="s1">startActivity(intent)</span>
+                        <span class="s1">finish()</span>
+                    <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                        <span class="s4">// Se não, configura o jogo novamente</span>
+                        <span class="s1">setupGame()</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s1">setupGame()</span>
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">getColorForName(colorName: String): Int {</span>
+        <span class="s0">return when </span><span class="s1">(colorName) {</span>
+            <span class="s2">&quot;Vermelho&quot; </span><span class="s1">-&gt; Color.RED</span>
+            <span class="s2">&quot;Azul&quot; </span><span class="s1">-&gt; Color.BLUE</span>
+            <span class="s2">&quot;Verde&quot; </span><span class="s1">-&gt; Color.GREEN</span>
+            <span class="s2">&quot;Amarelo&quot; </span><span class="s1">-&gt; Color.YELLOW</span>
+            <span class="s2">&quot;Preto&quot; </span><span class="s1">-&gt; Color.BLACK</span>
+            <span class="s2">&quot;Branco&quot; </span><span class="s1">-&gt; Color.WHITE</span>
+            <span class="s0">else </span><span class="s1">-&gt; Color.BLACK</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+</pre>
+</body>
+</html>
